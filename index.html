@@ -1,87 +1,806 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kaushik Songarwala | Data Engineer Portfolio</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-dark: #0a0e17;
+            --bg-card: #151b2b;
+            --accent-cyan: #00f5ff;
+            --accent-pink: #ff006e;
+            --accent-yellow: #ffbe0b;
+            --text-primary: #ffffff;
+            --text-secondary: #a8b2d1;
+            --glass-bg: rgba(21, 27, 43, 0.6);
+        }
 
-  <title>Kash | Data Engineer & GenAI</title>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
 
-  <!-- SEO -->
-  <meta name="description" content="Data Engineer & Generative AI portfolio showcasing fraud detection, synthetic data generation, LLM-based document analysis, and cloud-native data systems.">
-  <meta name="keywords" content="Data Engineer Portfolio, Generative AI Engineer, Fraud Detection, LLMs, Databricks GenAI, SQL Python AWS">
-  <meta name="author" content="Kaushik Songarwala">
+        body {
+            font-family: 'Space Mono', monospace;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
 
-  <!-- Open Graph -->
-  <meta property="og:title" content="Kash | Data Engineer & Generative AI">
-  <meta property="og:description" content="Modern data engineering and GenAI projects including fraud detection, synthetic data, and LLM-powered automation.">
-  <meta property="og:type" content="website">
-  <meta property="og:url" content="https://kaushikp47.github.io/">
+        /* Animated Background */
+        .bg-animation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            background: 
+                radial-gradient(circle at 20% 50%, rgba(0, 245, 255, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(255, 0, 110, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 50% 20%, rgba(255, 190, 11, 0.05) 0%, transparent 50%);
+            animation: float 20s ease-in-out infinite;
+        }
 
-  <link rel="stylesheet" href="styles.css">
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            33% { transform: translate(30px, -30px) scale(1.1); }
+            66% { transform: translate(-20px, 20px) scale(0.9); }
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            padding: 1.5rem 5%;
+            z-index: 1000;
+            border-bottom: 1px solid rgba(0, 245, 255, 0.1);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            gap: 3rem;
+            flex-wrap: wrap;
+        }
+
+        nav a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--accent-cyan);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--accent-cyan);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 8rem 5% 4rem;
+            position: relative;
+        }
+
+        .hero-content {
+            max-width: 900px;
+            animation: fadeInUp 1s ease-out;
+        }
+
+        .hero h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(3rem, 8vw, 6rem);
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            background: linear-gradient(135deg, var(--accent-cyan), var(--accent-pink), var(--accent-yellow));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: gradientShift 5s ease infinite;
+            background-size: 200% 200%;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+        }
+
+        .hero h2 {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(1.5rem, 3vw, 2.5rem);
+            font-weight: 600;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .hero p {
+            font-size: 1.1rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+            max-width: 700px;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 1rem 2.5rem;
+            font-family: 'Space Mono', monospace;
+            font-size: 1rem;
+            font-weight: 700;
+            text-decoration: none;
+            border: 2px solid;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .btn-primary {
+            background: var(--accent-cyan);
+            color: var(--bg-dark);
+            border-color: var(--accent-cyan);
+        }
+
+        .btn-primary:hover {
+            background: transparent;
+            color: var(--accent-cyan);
+            box-shadow: 0 0 20px rgba(0, 245, 255, 0.5);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: var(--text-primary);
+            border-color: var(--text-primary);
+        }
+
+        .btn-secondary:hover {
+            background: var(--text-primary);
+            color: var(--bg-dark);
+        }
+
+        /* Section Styling */
+        section {
+            padding: 6rem 5%;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-family: 'Syne', sans-serif;
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 800;
+            margin-bottom: 3rem;
+            text-align: center;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(90deg, var(--accent-cyan), var(--accent-pink));
+        }
+
+        /* Experience Cards */
+        .experience-grid {
+            display: grid;
+            gap: 2rem;
+        }
+
+        .experience-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(0, 245, 255, 0.2);
+            padding: 2.5rem;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .experience-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 5px;
+            height: 0;
+            background: linear-gradient(180deg, var(--accent-cyan), var(--accent-pink));
+            transition: height 0.3s ease;
+        }
+
+        .experience-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0, 245, 255, 0.2);
+        }
+
+        .experience-card:hover::before {
+            height: 100%;
+        }
+
+        .experience-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .experience-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent-cyan);
+        }
+
+        .experience-company {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            font-weight: 600;
+        }
+
+        .experience-date {
+            color: var(--accent-yellow);
+            font-size: 0.9rem;
+            font-weight: 700;
+        }
+
+        .experience-card ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .experience-card li {
+            padding-left: 1.5rem;
+            margin-bottom: 0.8rem;
+            position: relative;
+            color: var(--text-secondary);
+        }
+
+        .experience-card li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--accent-cyan);
+            font-size: 1.2rem;
+        }
+
+        /* Skills Section */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .skill-tag {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(0, 245, 255, 0.3);
+            padding: 1rem;
+            text-align: center;
+            border-radius: 10px;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            cursor: default;
+        }
+
+        .skill-tag:hover {
+            border-color: var(--accent-cyan);
+            background: rgba(0, 245, 255, 0.1);
+            transform: translateY(-5px);
+            box-shadow: 0 5px 15px rgba(0, 245, 255, 0.3);
+        }
+
+        /* Projects Section */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .project-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 0, 110, 0.2);
+            border-radius: 15px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .project-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(255, 0, 110, 0.3);
+        }
+
+        .project-image {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            background: linear-gradient(135deg, rgba(0, 245, 255, 0.2), rgba(255, 0, 110, 0.2));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .project-image::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 14, 23, 0.3);
+        }
+
+        .project-content {
+            padding: 2rem;
+        }
+
+        .project-title {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--accent-pink);
+        }
+
+        .project-description {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+
+        .project-link {
+            display: inline-block;
+            color: var(--accent-cyan);
+            text-decoration: none;
+            font-weight: 700;
+            border-bottom: 2px solid var(--accent-cyan);
+            transition: all 0.3s ease;
+        }
+
+        .project-link:hover {
+            color: var(--accent-yellow);
+            border-color: var(--accent-yellow);
+        }
+
+        /* Contact Section */
+        .contact-content {
+            text-align: center;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .contact-content p {
+            font-size: 1.2rem;
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        .contact-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+            margin-top: 2rem;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .contact-item:hover {
+            color: var(--accent-cyan);
+            transform: translateY(-3px);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem 5%;
+            background: var(--bg-card);
+            border-top: 1px solid rgba(0, 245, 255, 0.1);
+            color: var(--text-secondary);
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in {
+            opacity: 0;
+            animation: fadeInUp 1s ease-out forwards;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav ul {
+                gap: 1.5rem;
+            }
+
+            .hero {
+                padding: 6rem 5% 3rem;
+            }
+
+            .cta-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                text-align: center;
+            }
+
+            .projects-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .skills-grid {
+                grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            }
+        }
+
+        /* Education Card */
+        .education-card {
+            background: var(--glass-bg);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 190, 11, 0.2);
+            padding: 2.5rem;
+            border-radius: 15px;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .education-card h3 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.8rem;
+            color: var(--accent-yellow);
+            margin-bottom: 0.5rem;
+        }
+
+        .education-card .degree {
+            font-size: 1.2rem;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .education-card .gpa {
+            color: var(--accent-cyan);
+            font-weight: 700;
+        }
+    </style>
 </head>
-
 <body>
+    <div class="bg-animation"></div>
 
-  <nav class="navbar">
-    <div class="nav-container">
-      <span class="logo">Kash</span>
-      <div class="nav-links">
-        <a href="#projects">Projects</a>
-        <a href="#certification">Certification</a>
-        <a href="https://linkedin.com/in/kaushik47" target="_blank">LinkedIn</a>
-      </div>
-    </div>
-  </nav>
+    <nav>
+        <ul>
+            <li><a href="#about">About</a></li>
+            <li><a href="#experience">Experience</a></li>
+            <li><a href="#skills">Skills</a></li>
+            <li><a href="#projects">Projects</a></li>
+            <li><a href="#education">Education</a></li>
+            <li><a href="#contact">Contact</a></li>
+        </ul>
+    </nav>
 
-  <header class="hero">
-    <h1 class="fade-in">Data Engineer & GenAI Specialist</h1>
-    <p class="fade-in delay-1">
-      Building intelligent, scalable data systems using SQL, Python, cloud platforms,
-      and Generative AI to solve real-world problems.
-    </p>
-  </header>
+    <section class="hero" id="about">
+        <div class="hero-content">
+            <h1>KAUSHIK SONGARWALA</h1>
+            <h2>Data Engineer & Analytics Expert</h2>
+            <p>
+                Seasoned data engineer with expertise in designing end-to-end ETL pipelines and cloud-native data platforms. 
+                Delivered high-impact solutions including a $1M+ claims reconciliation pipeline achieving 99.9% uptime, 
+                while integrating ML models to cut manual processing by 40%.
+            </p>
+            <div class="cta-buttons">
+                <a href="#projects" class="btn btn-primary">View Projects</a>
+                <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+            </div>
+        </div>
+    </section>
 
-  <!-- PROJECTS -->
-  <section id="projects">
-    <h2 class="section-title">Selected Projects</h2>
+    <section id="experience">
+        <h2 class="section-title">Experience</h2>
+        <div class="experience-grid">
+            <div class="experience-card fade-in">
+                <div class="experience-header">
+                    <div>
+                        <h3 class="experience-title">Data Engineer</h3>
+                        <p class="experience-company">Intellirev</p>
+                    </div>
+                    <span class="experience-date">May 2025 - Present</span>
+                </div>
+                <ul>
+                    <li>Designed end-to-end ETL pipelines using Python (Pandas, PySpark) and MongoDB, reconciling $1M+ in annual claims with 99.9% uptime</li>
+                    <li>Integrated ML models into workflows, reducing manual reconciliation time by 40% and detecting 95% of billing anomalies</li>
+                    <li>Architected HIPAA-compliant AWS environment handling 500+ monthly transactions, optimizing throughput by 30%</li>
+                    <li>Collaborated with data scientists and Power BI developers to boost collected revenue by 15%</li>
+                </ul>
+            </div>
 
-    <div class="projects-grid">
+            <div class="experience-card fade-in">
+                <div class="experience-header">
+                    <div>
+                        <h3 class="experience-title">Data Engineer</h3>
+                        <p class="experience-company">Spectrum</p>
+                    </div>
+                    <span class="experience-date">Mar 2024 - Apr 2025</span>
+                </div>
+                <ul>
+                    <li>Built ETL pipelines and SQL transformations, improving throughput by 40% and reducing reporting delays by 2+ days</li>
+                    <li>Created Tableau dashboards integrated with data lakes for executive-level visibility</li>
+                    <li>Developed containerized FastAPI microservices with CI/CD, cutting deployment cycles by 50%</li>
+                    <li>Standardized data models improving reporting accuracy to 99%</li>
+                </ul>
+            </div>
 
-      <a class="project-card fade-in" href="https://fraud-detection-app-rkjfxxtoehiqrp4peddm5o.streamlit.app/" target="_blank">
-        <h3>💳 AI Fraud Detection System</h3>
-        <p>Real-time credit card fraud analysis using machine learning and intelligent feature engineering.</p>
-        <span>Streamlit • ML • Python</span>
-      </a>
+            <div class="experience-card fade-in">
+                <div class="experience-header">
+                    <div>
+                        <h3 class="experience-title">Data Engineer</h3>
+                        <p class="experience-company">BNY Mellon</p>
+                    </div>
+                    <span class="experience-date">Jul 2023 - Mar 2024</span>
+                </div>
+                <ul>
+                    <li>Engineered data integration pipelines across Snowflake, MySQL, and SAP, increasing efficiency by 30%</li>
+                    <li>Delivered Tableau and Power BI dashboards leveraging Databricks, cutting latency by 35%</li>
+                    <li>Implemented data governance with AWS IAM and audit logs ensuring compliance</li>
+                </ul>
+            </div>
 
-      <a class="project-card fade-in delay-1" href="https://colab.research.google.com/drive/1H7D3j2adfUDOKR994hzJlAFjUQlJwYl_?usp=sharing" target="_blank">
-        <h3>🧬 Synthetic Data Generation using GenAI</h3>
-        <p>Synthetic dataset generation using Generative AI to enable privacy-safe analytics and modeling.</p>
-        <span>Generative AI • Python • LLMs</span>
-      </a>
+            <div class="experience-card fade-in">
+                <div class="experience-header">
+                    <div>
+                        <h3 class="experience-title">Data Analyst</h3>
+                        <p class="experience-company">Awaywegoo</p>
+                    </div>
+                    <span class="experience-date">Jul 2019 - Jul 2021</span>
+                </div>
+                <ul>
+                    <li>Developed PostgreSQL analytics platform supporting 10K+ monthly queries</li>
+                    <li>Built modular ETL pipelines using Alteryx and MySQL, reducing latency by 40%</li>
+                    <li>Created reusable dashboard templates promoting analytics self-service adoption</li>
+                </ul>
+            </div>
+        </div>
+    </section>
 
-      <a class="project-card fade-in delay-2" href="https://colab.research.google.com/drive/19hP1UyuaeESajaJB8bMEk9cp1PyD0W7t?usp=sharing" target="_blank">
-        <h3>📄 Document Analysis using LLMs</h3>
-        <p>Automated PDF extraction with pdfplumber followed by NLP and LLM-based content analysis.</p>
-        <span>LLMs • NLP • Automation</span>
-      </a>
+    <section id="skills">
+        <h2 class="section-title">Skills & Technologies</h2>
+        <div class="skills-grid">
+            <div class="skill-tag">Python</div>
+            <div class="skill-tag">SQL</div>
+            <div class="skill-tag">AWS</div>
+            <div class="skill-tag">Snowflake</div>
+            <div class="skill-tag">Databricks</div>
+            <div class="skill-tag">Airflow</div>
+            <div class="skill-tag">PySpark</div>
+            <div class="skill-tag">Pandas</div>
+            <div class="skill-tag">MySQL</div>
+            <div class="skill-tag">PostgreSQL</div>
+            <div class="skill-tag">MongoDB</div>
+            <div class="skill-tag">Tableau</div>
+            <div class="skill-tag">Power BI</div>
+            <div class="skill-tag">Machine Learning</div>
+            <div class="skill-tag">ETL Pipelines</div>
+            <div class="skill-tag">Git</div>
+            <div class="skill-tag">Docker</div>
+            <div class="skill-tag">FastAPI</div>
+            <div class="skill-tag">SAP</div>
+            <div class="skill-tag">GraphQL</div>
+            <div class="skill-tag">Agile/SCRUM</div>
+            <div class="skill-tag">Data Governance</div>
+        </div>
+    </section>
 
-    </div>
-  </section>
+    <section id="projects">
+        <h2 class="section-title">Featured Projects</h2>
+        <div class="projects-grid">
+            <div class="project-card fade-in">
+                <div class="project-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                    <span style="font-size: 5rem; z-index: 1;">🛡️</span>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Fraud Detection System</h3>
+                    <p class="project-description">
+                        Interactive Streamlit application for real-time fraud detection using advanced machine learning algorithms. 
+                        Features comprehensive data analysis, model training, and predictive capabilities with an intuitive dashboard interface.
+                    </p>
+                    <a href="https://fraud-detection-app-rkjfxxtoehiqrp4peddm5o.streamlit.app/" target="_blank" class="project-link">
+                        View Live Demo →
+                    </a>
+                </div>
+            </div>
 
-  <!-- CERTIFICATION -->
-  <section id="certification">
-    <h2 class="section-title">Certification</h2>
+            <div class="project-card fade-in">
+                <div class="project-image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
+                    <span style="font-size: 5rem; z-index: 1;">📊</span>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">Data Analytics Pipeline</h3>
+                    <p class="project-description">
+                        Comprehensive data analysis and ETL pipeline built in Google Colab. Implements advanced data processing techniques, 
+                        feature engineering, and visualization methods for extracting actionable insights from complex datasets.
+                    </p>
+                    <a href="https://colab.research.google.com/drive/1H7D3j2adfUDOKR994hzJlAFjUQlJwYl_?usp=sharing" target="_blank" class="project-link">
+                        Open in Colab →
+                    </a>
+                </div>
+            </div>
 
-    <a class="cert-card fade-in" href="https://credentials.databricks.com/b4d148a6-c71a-47ee-ae93-e121153d109e#acc.iEDKMbRh" target="_blank">
-      <h3>Databricks Certified Generative AI Engineer – Associate</h3>
-      <p>Credential validating expertise in building, deploying, and scaling Generative AI solutions.</p>
-    </a>
-  </section>
+            <div class="project-card fade-in">
+                <div class="project-image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                    <span style="font-size: 5rem; z-index: 1;">🤖</span>
+                </div>
+                <div class="project-content">
+                    <h3 class="project-title">ML Model Development</h3>
+                    <p class="project-description">
+                        Advanced machine learning model development and experimentation notebook. Includes model selection, 
+                        hyperparameter tuning, cross-validation, and performance optimization workflows for production deployment.
+                    </p>
+                    <a href="https://colab.research.google.com/drive/19hP1UyuaeESajaJB8bMEk9cp1PyD0W7t?usp=sharing" target="_blank" class="project-link">
+                        Open in Colab →
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
 
-  <footer>
-    <p>© 2026 Kash • Data Engineer • Generative AI • GitHub Pages</p>
-  </footer>
+    <section id="education">
+        <h2 class="section-title">Education</h2>
+        <div class="education-card fade-in">
+            <h3>Stevens Institute of Technology</h3>
+            <p class="degree">Master of Science in Information Systems</p>
+            <p class="experience-date">Aug 2021 - May 2023</p>
+            <p class="gpa">GPA: 3.819 / 4.0</p>
+        </div>
+    </section>
 
-  <script src="script.js"></script>
+    <section id="contact">
+        <h2 class="section-title">Get In Touch</h2>
+        <div class="contact-content">
+            <p>
+                I'm always interested in hearing about new opportunities, collaborations, or just connecting with fellow data enthusiasts. 
+                Feel free to reach out!
+            </p>
+            <div class="contact-links">
+                <a href="mailto:songarwala@gmail.com" class="contact-item">
+                    📧 songarwala@gmail.com
+                </a>
+                <a href="tel:+15516896916" class="contact-item">
+                    📱 +1 (551) 689-6916
+                </a>
+                <a href="https://linkedin.com/in/kaushik47/" target="_blank" class="contact-item">
+                    💼 LinkedIn Profile
+                </a>
+            </div>
+            <div class="cta-buttons" style="margin-top: 2rem;">
+                <a href="mailto:songarwala@gmail.com" class="btn btn-primary">Send Email</a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>&copy; 2026 Kaushik Songarwala. Built with passion for data engineering.</p>
+    </footer>
+
+    <script>
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Active navigation highlighting
+        window.addEventListener('scroll', () => {
+            let current = '';
+            const sections = document.querySelectorAll('section[id]');
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            document.querySelectorAll('nav a').forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${current}`) {
+                    link.classList.add('active');
+                }
+            });
+        });
+    </script>
 </body>
 </html>
