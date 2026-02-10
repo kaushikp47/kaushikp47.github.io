@@ -119,7 +119,7 @@
 
         .hero h1 {
             font-family: 'Syne', sans-serif;
-            font-size: clamp(3rem, 8vw, 6rem);
+            font-size: clamp(2.5rem, 6vw, 4.5rem);
             font-weight: 800;
             line-height: 1.1;
             margin-bottom: 1rem;
@@ -771,9 +771,7 @@
                 while integrating ML models to cut manual processing by 40%.
             </p>
             <div class="cta-buttons">
-                <a href="#projects" class="btn btn-primary">View Projects</a>
-                <a href="#" id="resumeBtnHero" class="btn btn-secondary">View Resume</a>
-                <a href="#contact" class="btn btn-secondary">Get In Touch</a>
+                <a href="#contact" class="btn btn-primary">Get In Touch</a>
             </div>
         </div>
     </section>
@@ -1271,7 +1269,7 @@
                 <div class="resume-contact-info">
                     <span>📍 Jersey City, NJ, USA</span>
                     <span>📱 +1 (551) 689-6916</span>
-                    <a href="mailto:songarwala@gmail.com">📧 songarwala@gmail.com</a>
+                    <a href="/cdn-cgi/l/email-protection#40332f2e27213237212c2100272d21292c6e232f2d">📧 <span class="__cf_email__" data-cfemail="20534f4e47415257414c4160474d41494c0e434f4d">[email&#160;protected]</span></a>
                     <a href="https://linkedin.com/in/kaushik47/" target="_blank">💼 LinkedIn</a>
                 </div>
             </div>
@@ -1404,7 +1402,7 @@
             </div>
 
             <div class="resume-download">
-                <a href="mailto:songarwala@gmail.com?subject=Resume Request" class="btn btn-primary">Request Full Resume PDF</a>
+                <a href="/cdn-cgi/l/email-protection#6714080900061510060b0627000a060e0b4904080a581412050d0204135a350214120a024735021612021413" class="btn btn-primary">Request Full Resume PDF</a>
             </div>
         </div>
     </div>
@@ -1413,7 +1411,7 @@
         <p>&copy; 2026 Kaushik Songarwala. Built with passion for data engineering.</p>
     </footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -1471,7 +1469,6 @@
         // Resume Modal
         const resumeModal = document.getElementById('resumeModal');
         const resumeBtn = document.getElementById('resumeBtn');
-        const resumeBtnHero = document.getElementById('resumeBtnHero');
         const closeResume = document.getElementById('closeResume');
 
         // Open resume modal
@@ -1487,23 +1484,15 @@
             document.body.style.overflow = 'auto';
         }
 
-        resumeBtn.addEventListener('click', openResume);
-        resumeBtnHero.addEventListener('click', openResume);
-        closeResume.addEventListener('click', closeResumeModal);
+        if (resumeBtn) {
+            resumeBtn.addEventListener('click', openResume);
+        }
+        
+        if (closeResume) {
+            closeResume.addEventListener('click', closeResumeModal);
+        }
 
         // Close modal when clicking outside
         resumeModal.addEventListener('click', (e) => {
             if (e.target === resumeModal) {
-                closeResumeModal();
-            }
-        });
-
-        // Close modal with Escape key
-        document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && resumeModal.classList.contains('active')) {
-                closeResumeModal();
-            }
-        });
-    </script>
-</body>
-</html>
+                clo
