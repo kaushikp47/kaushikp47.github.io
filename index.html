@@ -529,6 +529,221 @@
             color: var(--accent-cyan);
             font-weight: 700;
         }
+
+        /* Resume Modal */
+        .resume-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(10, 14, 23, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 2000;
+            overflow-y: auto;
+            padding: 2rem;
+            animation: fadeIn 0.3s ease-out;
+        }
+
+        .resume-modal.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .resume-container {
+            max-width: 900px;
+            margin: 2rem auto;
+            background: var(--bg-card);
+            border: 2px solid var(--accent-cyan);
+            border-radius: 15px;
+            padding: 3rem;
+            position: relative;
+            animation: slideUp 0.4s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .resume-close {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            width: 40px;
+            height: 40px;
+            background: var(--accent-pink);
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 1.5rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+            font-weight: bold;
+        }
+
+        .resume-close:hover {
+            background: var(--accent-cyan);
+            transform: rotate(90deg);
+        }
+
+        .resume-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            padding-bottom: 2rem;
+            border-bottom: 2px solid rgba(0, 245, 255, 0.2);
+        }
+
+        .resume-header h1 {
+            font-family: 'Syne', sans-serif;
+            font-size: 2.5rem;
+            color: var(--accent-cyan);
+            margin-bottom: 0.5rem;
+        }
+
+        .resume-header .title {
+            font-size: 1.3rem;
+            color: var(--text-secondary);
+            margin-bottom: 1rem;
+        }
+
+        .resume-contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+            font-size: 0.9rem;
+            color: var(--text-secondary);
+        }
+
+        .resume-contact-info a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .resume-contact-info a:hover {
+            color: var(--accent-cyan);
+        }
+
+        .resume-section {
+            margin-bottom: 2.5rem;
+        }
+
+        .resume-section h2 {
+            font-family: 'Syne', sans-serif;
+            font-size: 1.8rem;
+            color: var(--accent-pink);
+            margin-bottom: 1rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 2px solid rgba(255, 0, 110, 0.3);
+        }
+
+        .resume-item {
+            margin-bottom: 2rem;
+        }
+
+        .resume-item-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 0.8rem;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+        }
+
+        .resume-item-title {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--text-primary);
+        }
+
+        .resume-item-company {
+            color: var(--accent-cyan);
+            font-weight: 600;
+        }
+
+        .resume-item-date {
+            color: var(--accent-yellow);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .resume-item ul {
+            list-style: none;
+            padding-left: 0;
+        }
+
+        .resume-item li {
+            padding-left: 1.5rem;
+            margin-bottom: 0.5rem;
+            position: relative;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        .resume-item li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--accent-cyan);
+        }
+
+        .resume-summary {
+            color: var(--text-secondary);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+
+        .resume-skills {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.8rem;
+        }
+
+        .resume-skill {
+            background: rgba(0, 245, 255, 0.1);
+            border: 1px solid var(--accent-cyan);
+            padding: 0.5rem 1rem;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            color: var(--text-primary);
+        }
+
+        .resume-download {
+            text-align: center;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 2px solid rgba(0, 245, 255, 0.2);
+        }
+
+        @media (max-width: 768px) {
+            .resume-container {
+                padding: 2rem 1.5rem;
+            }
+
+            .resume-header h1 {
+                font-size: 2rem;
+            }
+
+            .resume-item-header {
+                flex-direction: column;
+            }
+        }
     </style>
 </head>
 <body>
@@ -542,6 +757,7 @@
             <li><a href="#projects">Projects</a></li>
             <li><a href="#education">Education</a></li>
             <li><a href="#contact">Contact</a></li>
+            <li><a href="#" id="resumeBtn">Resume</a></li>
         </ul>
     </nav>
 
@@ -556,6 +772,7 @@
             </p>
             <div class="cta-buttons">
                 <a href="#projects" class="btn btn-primary">View Projects</a>
+                <a href="#" id="resumeBtnHero" class="btn btn-secondary">View Resume</a>
                 <a href="#contact" class="btn btn-secondary">Get In Touch</a>
             </div>
         </div>
@@ -660,8 +877,76 @@
         <h2 class="section-title">Featured Projects</h2>
         <div class="projects-grid">
             <div class="project-card fade-in">
-                <div class="project-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-                    <span style="font-size: 5rem; z-index: 1;">🛡️</span>
+                <div class="project-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 2rem;">
+                    <svg viewBox="0 0 400 250" style="width: 100%; height: 100%;">
+                        <!-- Shield base -->
+                        <defs>
+                            <linearGradient id="shieldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#00f5ff;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#ff006e;stop-opacity:1" />
+                            </linearGradient>
+                            <filter id="glow">
+                                <feGaussianBlur stdDeviation="4" result="coloredBlur"/>
+                                <feMerge>
+                                    <feMergeNode in="coloredBlur"/>
+                                    <feMergeNode in="SourceGraphic"/>
+                                </feMerge>
+                            </filter>
+                        </defs>
+                        
+                        <!-- Background network -->
+                        <g opacity="0.3">
+                            <circle cx="50" cy="50" r="3" fill="#fff"/>
+                            <circle cx="150" cy="80" r="3" fill="#fff"/>
+                            <circle cx="250" cy="60" r="3" fill="#fff"/>
+                            <circle cx="350" cy="90" r="3" fill="#fff"/>
+                            <circle cx="100" cy="180" r="3" fill="#fff"/>
+                            <circle cx="300" cy="190" r="3" fill="#fff"/>
+                            <line x1="50" y1="50" x2="150" y2="80" stroke="#fff" stroke-width="1"/>
+                            <line x1="150" y1="80" x2="250" y2="60" stroke="#fff" stroke-width="1"/>
+                            <line x1="250" y1="60" x2="350" y2="90" stroke="#fff" stroke-width="1"/>
+                            <line x1="100" y1="180" x2="300" y2="190" stroke="#fff" stroke-width="1"/>
+                        </g>
+                        
+                        <!-- Main shield -->
+                        <path d="M 200 40 L 260 60 L 260 130 Q 260 170 200 210 Q 140 170 140 130 L 140 60 Z" 
+                              fill="url(#shieldGrad)" opacity="0.9" filter="url(#glow)"/>
+                        
+                        <!-- Shield outline -->
+                        <path d="M 200 40 L 260 60 L 260 130 Q 260 170 200 210 Q 140 170 140 130 L 140 60 Z" 
+                              fill="none" stroke="#fff" stroke-width="3"/>
+                        
+                        <!-- Checkmark -->
+                        <path d="M 170 120 L 190 145 L 235 95" 
+                              fill="none" stroke="#fff" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"
+                              filter="url(#glow)">
+                            <animate attributeName="stroke-dasharray" from="0,100" to="100,0" dur="2s" repeatCount="indefinite"/>
+                        </path>
+                        
+                        <!-- Scanning lines -->
+                        <line x1="140" y1="100" x2="260" y2="100" stroke="#00f5ff" stroke-width="2" opacity="0.6">
+                            <animate attributeName="y1" values="60;200;60" dur="3s" repeatCount="indefinite"/>
+                            <animate attributeName="y2" values="60;200;60" dur="3s" repeatCount="indefinite"/>
+                        </line>
+                        
+                        <!-- Data points -->
+                        <g>
+                            <circle cx="280" cy="110" r="4" fill="#00f5ff">
+                                <animate attributeName="opacity" values="1;0.3;1" dur="1.5s" repeatCount="indefinite"/>
+                            </circle>
+                            <circle cx="290" cy="140" r="4" fill="#ff006e">
+                                <animate attributeName="opacity" values="0.3;1;0.3" dur="1.5s" repeatCount="indefinite"/>
+                            </circle>
+                            <circle cx="110" cy="100" r="4" fill="#ffbe0b">
+                                <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
+                            </circle>
+                        </g>
+                        
+                        <!-- Alert indicators -->
+                        <text x="200" y="235" text-anchor="middle" fill="#fff" font-size="12" font-weight="bold">
+                            FRAUD DETECTION ACTIVE
+                        </text>
+                    </svg>
                 </div>
                 <div class="project-content">
                     <h3 class="project-title">Fraud Detection System</h3>
@@ -676,8 +961,119 @@
             </div>
 
             <div class="project-card fade-in">
-                <div class="project-image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
-                    <span style="font-size: 5rem; z-index: 1;">📊</span>
+                <div class="project-image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); padding: 2rem;">
+                    <svg viewBox="0 0 400 250" style="width: 100%; height: 100%;">
+                        <defs>
+                            <linearGradient id="pipeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+                                <stop offset="0%" style="stop-color:#00f5ff;stop-opacity:1" />
+                                <stop offset="50%" style="stop-color:#ffbe0b;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#ff006e;stop-opacity:1" />
+                            </linearGradient>
+                            <filter id="pipeGlow">
+                                <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+                                <feMerge>
+                                    <feMergeNode in="coloredBlur"/>
+                                    <feMergeNode in="SourceGraphic"/>
+                                </feMerge>
+                            </filter>
+                        </defs>
+                        
+                        <!-- Data source (left) -->
+                        <g>
+                            <rect x="20" y="80" width="60" height="90" rx="5" fill="#fff" opacity="0.2" stroke="#fff" stroke-width="2"/>
+                            <text x="50" y="105" text-anchor="middle" fill="#fff" font-size="10" font-weight="bold">DATA</text>
+                            <text x="50" y="120" text-anchor="middle" fill="#fff" font-size="10" font-weight="bold">SOURCE</text>
+                            <!-- Database icon -->
+                            <ellipse cx="50" cy="140" rx="15" ry="5" fill="none" stroke="#00f5ff" stroke-width="2"/>
+                            <ellipse cx="50" cy="150" rx="15" ry="5" fill="none" stroke="#00f5ff" stroke-width="2"/>
+                            <line x1="35" y1="140" x2="35" y2="150" stroke="#00f5ff" stroke-width="2"/>
+                            <line x1="65" y1="140" x2="65" y2="150" stroke="#00f5ff" stroke-width="2"/>
+                        </g>
+                        
+                        <!-- Pipeline flow -->
+                        <g>
+                            <!-- Arrow 1 -->
+                            <line x1="80" y1="125" x2="130" y2="125" stroke="url(#pipeGrad)" stroke-width="4" filter="url(#pipeGlow)">
+                                <animate attributeName="stroke-dasharray" values="0,150;150,0" dur="2s" repeatCount="indefinite"/>
+                            </line>
+                            <polygon points="130,120 140,125 130,130" fill="#00f5ff"/>
+                            
+                            <!-- Data particles -->
+                            <circle cx="90" cy="125" r="3" fill="#00f5ff">
+                                <animate attributeName="cx" values="80;140;80" dur="2s" repeatCount="indefinite"/>
+                            </circle>
+                            <circle cx="110" cy="125" r="3" fill="#ffbe0b">
+                                <animate attributeName="cx" values="80;140;80" dur="2s" begin="0.5s" repeatCount="indefinite"/>
+                            </circle>
+                        </g>
+                        
+                        <!-- ETL Process (center) -->
+                        <g>
+                            <rect x="140" y="60" width="120" height="130" rx="8" fill="#fff" opacity="0.2" stroke="#fff" stroke-width="2"/>
+                            <text x="200" y="85" text-anchor="middle" fill="#fff" font-size="12" font-weight="bold">ETL PIPELINE</text>
+                            
+                            <!-- Extract -->
+                            <rect x="155" y="95" width="90" height="25" rx="3" fill="#00f5ff" opacity="0.6"/>
+                            <text x="200" y="112" text-anchor="middle" fill="#fff" font-size="10" font-weight="bold">EXTRACT</text>
+                            
+                            <!-- Transform -->
+                            <rect x="155" y="125" width="90" height="25" rx="3" fill="#ffbe0b" opacity="0.6"/>
+                            <text x="200" y="142" text-anchor="middle" fill="#fff" font-size="10" font-weight="bold">TRANSFORM</text>
+                            
+                            <!-- Load -->
+                            <rect x="155" y="155" width="90" height="25" rx="3" fill="#ff006e" opacity="0.6"/>
+                            <text x="200" y="172" text-anchor="middle" fill="#fff" font-size="10" font-weight="bold">LOAD</text>
+                            
+                            <!-- Processing indicator -->
+                            <circle cx="200" cy="107" r="2" fill="#fff">
+                                <animate attributeName="opacity" values="0.3;1;0.3" dur="1s" repeatCount="indefinite"/>
+                            </circle>
+                            <circle cx="200" cy="137" r="2" fill="#fff">
+                                <animate attributeName="opacity" values="0.3;1;0.3" dur="1s" begin="0.3s" repeatCount="indefinite"/>
+                            </circle>
+                            <circle cx="200" cy="167" r="2" fill="#fff">
+                                <animate attributeName="opacity" values="0.3;1;0.3" dur="1s" begin="0.6s" repeatCount="indefinite"/>
+                            </circle>
+                        </g>
+                        
+                        <!-- Arrow 2 -->
+                        <g>
+                            <line x1="260" y1="125" x2="310" y2="125" stroke="url(#pipeGrad)" stroke-width="4" filter="url(#pipeGlow)">
+                                <animate attributeName="stroke-dasharray" values="0,150;150,0" dur="2s" repeatCount="indefinite"/>
+                            </line>
+                            <polygon points="310,120 320,125 310,130" fill="#ff006e"/>
+                            
+                            <circle cx="270" cy="125" r="3" fill="#00f5ff">
+                                <animate attributeName="cx" values="260;320;260" dur="2s" repeatCount="indefinite"/>
+                            </circle>
+                            <circle cx="290" cy="125" r="3" fill="#ff006e">
+                                <animate attributeName="cx" values="260;320;260" dur="2s" begin="0.5s" repeatCount="indefinite"/>
+                            </circle>
+                        </g>
+                        
+                        <!-- Analytics output (right) -->
+                        <g>
+                            <rect x="320" y="80" width="60" height="90" rx="5" fill="#fff" opacity="0.2" stroke="#fff" stroke-width="2"/>
+                            <text x="350" y="105" text-anchor="middle" fill="#fff" font-size="10" font-weight="bold">INSIGHTS</text>
+                            
+                            <!-- Chart bars -->
+                            <rect x="330" y="145" width="8" height="15" fill="#00f5ff">
+                                <animate attributeName="height" values="15;25;15" dur="2s" repeatCount="indefinite"/>
+                            </rect>
+                            <rect x="342" y="135" width="8" height="25" fill="#ffbe0b">
+                                <animate attributeName="height" values="25;35;25" dur="2s" begin="0.3s" repeatCount="indefinite"/>
+                            </rect>
+                            <rect x="354" y="140" width="8" height="20" fill="#ff006e">
+                                <animate attributeName="height" values="20;30;20" dur="2s" begin="0.6s" repeatCount="indefinite"/>
+                            </rect>
+                            <line x1="328" y1="160" x2="364" y2="160" stroke="#fff" stroke-width="1"/>
+                        </g>
+                        
+                        <!-- Status text -->
+                        <text x="200" y="220" text-anchor="middle" fill="#fff" font-size="11" font-weight="bold">
+                            DATA PROCESSING ACTIVE
+                        </text>
+                    </svg>
                 </div>
                 <div class="project-content">
                     <h3 class="project-title">Data Analytics Pipeline</h3>
@@ -692,8 +1088,129 @@
             </div>
 
             <div class="project-card fade-in">
-                <div class="project-image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
-                    <span style="font-size: 5rem; z-index: 1;">🤖</span>
+                <div class="project-image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); padding: 2rem;">
+                    <svg viewBox="0 0 400 250" style="width: 100%; height: 100%;">
+                        <defs>
+                            <linearGradient id="brainGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                                <stop offset="0%" style="stop-color:#00f5ff;stop-opacity:1" />
+                                <stop offset="100%" style="stop-color:#ff006e;stop-opacity:1" />
+                            </linearGradient>
+                            <filter id="neuralGlow">
+                                <feGaussianBlur stdDeviation="2" result="coloredBlur"/>
+                                <feMerge>
+                                    <feMergeNode in="coloredBlur"/>
+                                    <feMergeNode in="SourceGraphic"/>
+                                </feMerge>
+                            </filter>
+                        </defs>
+                        
+                        <!-- Neural Network Visualization -->
+                        <!-- Input Layer -->
+                        <g>
+                            <circle cx="80" cy="80" r="12" fill="#00f5ff" opacity="0.8" filter="url(#neuralGlow)">
+                                <animate attributeName="r" values="12;14;12" dur="2s" repeatCount="indefinite"/>
+                            </circle>
+                            <circle cx="80" cy="125" r="12" fill="#00f5ff" opacity="0.8" filter="url(#neuralGlow)">
+                                <animate attributeName="r" values="12;14;12" dur="2s" begin="0.3s" repeatCount="indefinite"/>
+                            </circle>
+                            <circle cx="80" cy="170" r="12" fill="#00f5ff" opacity="0.8" filter="url(#neuralGlow)">
+                                <animate attributeName="r" values="12;14;12" dur="2s" begin="0.6s" repeatCount="indefinite"/>
+                            </circle>
+                            <text x="80" y="50" text-anchor="middle" fill="#fff" font-size="11" font-weight="bold">INPUT</text>
+                        </g>
+                        
+                        <!-- Hidden Layer 1 -->
+                        <g>
+                            <circle cx="170" cy="60" r="12" fill="#ffbe0b" opacity="0.8" filter="url(#neuralGlow)"/>
+                            <circle cx="170" cy="100" r="12" fill="#ffbe0b" opacity="0.8" filter="url(#neuralGlow)"/>
+                            <circle cx="170" cy="140" r="12" fill="#ffbe0b" opacity="0.8" filter="url(#neuralGlow)"/>
+                            <circle cx="170" cy="180" r="12" fill="#ffbe0b" opacity="0.8" filter="url(#neuralGlow)"/>
+                            <text x="170" y="35" text-anchor="middle" fill="#fff" font-size="11" font-weight="bold">HIDDEN</text>
+                        </g>
+                        
+                        <!-- Hidden Layer 2 -->
+                        <g>
+                            <circle cx="260" cy="70" r="12" fill="#ff006e" opacity="0.8" filter="url(#neuralGlow)"/>
+                            <circle cx="260" cy="115" r="12" fill="#ff006e" opacity="0.8" filter="url(#neuralGlow)"/>
+                            <circle cx="260" cy="160" r="12" fill="#ff006e" opacity="0.8" filter="url(#neuralGlow)"/>
+                            <text x="260" y="35" text-anchor="middle" fill="#fff" font-size="11" font-weight="bold">LAYERS</text>
+                        </g>
+                        
+                        <!-- Output Layer -->
+                        <g>
+                            <circle cx="340" cy="100" r="14" fill="url(#brainGrad)" opacity="0.9" filter="url(#neuralGlow)">
+                                <animate attributeName="r" values="14;16;14" dur="1.5s" repeatCount="indefinite"/>
+                            </circle>
+                            <circle cx="340" cy="140" r="14" fill="url(#brainGrad)" opacity="0.9" filter="url(#neuralGlow)">
+                                <animate attributeName="r" values="14;16;14" dur="1.5s" begin="0.5s" repeatCount="indefinite"/>
+                            </circle>
+                            <text x="340" y="70" text-anchor="middle" fill="#fff" font-size="11" font-weight="bold">OUTPUT</text>
+                        </g>
+                        
+                        <!-- Connections (animated) -->
+                        <g opacity="0.4">
+                            <!-- Input to Hidden 1 -->
+                            <line x1="92" y1="80" x2="158" y2="60" stroke="#00f5ff" stroke-width="1.5">
+                                <animate attributeName="opacity" values="0.3;0.8;0.3" dur="2s" repeatCount="indefinite"/>
+                            </line>
+                            <line x1="92" y1="80" x2="158" y2="100" stroke="#00f5ff" stroke-width="1.5">
+                                <animate attributeName="opacity" values="0.3;0.8;0.3" dur="2s" begin="0.2s" repeatCount="indefinite"/>
+                            </line>
+                            <line x1="92" y1="125" x2="158" y2="100" stroke="#00f5ff" stroke-width="1.5">
+                                <animate attributeName="opacity" values="0.3;0.8;0.3" dur="2s" begin="0.4s" repeatCount="indefinite"/>
+                            </line>
+                            <line x1="92" y1="125" x2="158" y2="140" stroke="#00f5ff" stroke-width="1.5">
+                                <animate attributeName="opacity" values="0.3;0.8;0.3" dur="2s" begin="0.6s" repeatCount="indefinite"/>
+                            </line>
+                            <line x1="92" y1="170" x2="158" y2="140" stroke="#00f5ff" stroke-width="1.5">
+                                <animate attributeName="opacity" values="0.3;0.8;0.3" dur="2s" begin="0.8s" repeatCount="indefinite"/>
+                            </line>
+                            <line x1="92" y1="170" x2="158" y2="180" stroke="#00f5ff" stroke-width="1.5">
+                                <animate attributeName="opacity" values="0.3;0.8;0.3" dur="2s" begin="1s" repeatCount="indefinite"/>
+                            </line>
+                            
+                            <!-- Hidden 1 to Hidden 2 -->
+                            <line x1="182" y1="60" x2="248" y2="70" stroke="#ffbe0b" stroke-width="1.5"/>
+                            <line x1="182" y1="100" x2="248" y2="115" stroke="#ffbe0b" stroke-width="1.5"/>
+                            <line x1="182" y1="140" x2="248" y2="115" stroke="#ffbe0b" stroke-width="1.5"/>
+                            <line x1="182" y1="180" x2="248" y2="160" stroke="#ffbe0b" stroke-width="1.5"/>
+                            
+                            <!-- Hidden 2 to Output -->
+                            <line x1="272" y1="70" x2="326" y2="100" stroke="#ff006e" stroke-width="2">
+                                <animate attributeName="opacity" values="0.4;1;0.4" dur="1.5s" repeatCount="indefinite"/>
+                            </line>
+                            <line x1="272" y1="115" x2="326" y2="100" stroke="#ff006e" stroke-width="2">
+                                <animate attributeName="opacity" values="0.4;1;0.4" dur="1.5s" begin="0.3s" repeatCount="indefinite"/>
+                            </line>
+                            <line x1="272" y1="115" x2="326" y2="140" stroke="#ff006e" stroke-width="2">
+                                <animate attributeName="opacity" values="0.4;1;0.4" dur="1.5s" begin="0.6s" repeatCount="indefinite"/>
+                            </line>
+                            <line x1="272" y1="160" x2="326" y2="140" stroke="#ff006e" stroke-width="2">
+                                <animate attributeName="opacity" values="0.4;1;0.4" dur="1.5s" begin="0.9s" repeatCount="indefinite"/>
+                            </line>
+                        </g>
+                        
+                        <!-- Data flow particles -->
+                        <circle cx="80" cy="80" r="3" fill="#fff">
+                            <animate attributeName="cx" values="80;170;260;340" dur="3s" repeatCount="indefinite"/>
+                            <animate attributeName="cy" values="80;100;115;100" dur="3s" repeatCount="indefinite"/>
+                            <animate attributeName="opacity" values="1;0.5;1" dur="3s" repeatCount="indefinite"/>
+                        </circle>
+                        <circle cx="80" cy="125" r="3" fill="#fff">
+                            <animate attributeName="cx" values="80;170;260;340" dur="3s" begin="1s" repeatCount="indefinite"/>
+                            <animate attributeName="cy" values="125;140;115;140" dur="3s" begin="1s" repeatCount="indefinite"/>
+                            <animate attributeName="opacity" values="1;0.5;1" dur="3s" begin="1s" repeatCount="indefinite"/>
+                        </circle>
+                        
+                        <!-- Accuracy meter -->
+                        <g>
+                            <rect x="30" y="215" width="340" height="20" rx="10" fill="#fff" opacity="0.2" stroke="#fff" stroke-width="1"/>
+                            <rect x="30" y="215" width="290" height="20" rx="10" fill="url(#brainGrad)" opacity="0.8">
+                                <animate attributeName="width" values="250;310;290" dur="4s" repeatCount="indefinite"/>
+                            </rect>
+                            <text x="200" y="208" text-anchor="middle" fill="#fff" font-size="10" font-weight="bold">MODEL ACCURACY: 95.2%</text>
+                        </g>
+                    </svg>
                 </div>
                 <div class="project-content">
                     <h3 class="project-title">ML Model Development</h3>
@@ -727,8 +1244,8 @@
                 Feel free to reach out!
             </p>
             <div class="contact-links">
-                <a href="mailto:songarwala@gmail.com" class="contact-item">
-                    📧 songarwala@gmail.com
+                <a href="/cdn-cgi/l/email-protection#d2a1bdbcb5b3a0a5b3beb392b5bfb3bbbefcb1bdbf" class="contact-item">
+                    📧 <span class="__cf_email__" data-cfemail="fc8f93929b9d8e8b9d909dbc9b919d9590d29f9391">[email&#160;protected]</span>
                 </a>
                 <a href="tel:+15516896916" class="contact-item">
                     📱 +1 (551) 689-6916
@@ -738,16 +1255,165 @@
                 </a>
             </div>
             <div class="cta-buttons" style="margin-top: 2rem;">
-                <a href="mailto:songarwala@gmail.com" class="btn btn-primary">Send Email</a>
+                <a href="/cdn-cgi/l/email-protection#98ebf7f6fff9eaeff9f4f9d8fff5f9f1f4b6fbf7f5" class="btn btn-primary">Send Email</a>
             </div>
         </div>
     </section>
+
+    <!-- Resume Modal -->
+    <div id="resumeModal" class="resume-modal">
+        <div class="resume-container">
+            <button class="resume-close" id="closeResume">×</button>
+            
+            <div class="resume-header">
+                <h1>Kaushik Songarwala</h1>
+                <p class="title">Data Engineer & Analytics Expert</p>
+                <div class="resume-contact-info">
+                    <span>📍 Jersey City, NJ, USA</span>
+                    <span>📱 +1 (551) 689-6916</span>
+                    <a href="mailto:songarwala@gmail.com">📧 songarwala@gmail.com</a>
+                    <a href="https://linkedin.com/in/kaushik47/" target="_blank">💼 LinkedIn</a>
+                </div>
+            </div>
+
+            <div class="resume-section">
+                <h2>Summary</h2>
+                <p class="resume-summary">
+                    Seasoned data engineer with a strong track record in designing and maintaining end-to-end ETL pipelines and cloud-native 
+                    data platforms. Delivered high-impact solutions such as a $1M+ claims reconciliation pipeline on AWS that achieved 99.9% 
+                    uptime and integrated machine-learning models to cut manual processing time by 40%. Also built scalable data integration 
+                    and CI/CD workflows that boosted reporting throughput by 40% and reduced deployment cycles by half. Seeking to apply 
+                    this expertise to accelerate data-driven decision making and operational efficiency for the organization.
+                </p>
+            </div>
+
+            <div class="resume-section">
+                <h2>Professional Experience</h2>
+                
+                <div class="resume-item">
+                    <div class="resume-item-header">
+                        <div>
+                            <div class="resume-item-title">Data Engineer</div>
+                            <div class="resume-item-company">Intellirev</div>
+                        </div>
+                        <div class="resume-item-date">May 2025 - Present</div>
+                    </div>
+                    <ul>
+                        <li>Designed and maintained end-to-end ETL pipelines using Python (Pandas, PySpark) and MongoDB, reconciling $1M+ in annual claims and payments with 99.9% data uptime, enabling real-time visibility across financial and supply chain functions.</li>
+                        <li>Integrated machine learning models into ETL workflows, reducing manual reconciliation time by 40% and detecting 95% of billing anomalies before submission, improving automation accuracy and compliance.</li>
+                        <li>Architected a HIPAA-compliant cloud environment on AWS (EC2, S3, Lambda) handling 500+ monthly data transactions, optimizing throughput by 30% while ensuring regulatory-grade data security.</li>
+                        <li>Collaborated with data scientists, Power BI developers, and SAP stakeholders to operationalize ML-driven claim analysis, boosting collected revenue by 15% and surfacing actionable insights for supply chain and risk mitigation strategies.</li>
+                    </ul>
+                </div>
+
+                <div class="resume-item">
+                    <div class="resume-item-header">
+                        <div>
+                            <div class="resume-item-title">Data Engineer</div>
+                            <div class="resume-item-company">Spectrum</div>
+                        </div>
+                        <div class="resume-item-date">Mar 2024 - Apr 2025</div>
+                    </div>
+                    <ul>
+                        <li>Built and deployed ETL pipelines and SQL transformations in MySQL server, improving throughput by 40% and reducing reporting delays by 2+ days across business intelligence workflows.</li>
+                        <li>Created Tableau dashboards integrated with data lakes, enhancing executive-level visibility into marketing and procurement performance.</li>
+                        <li>Developed containerized FastAPI microservices and implemented CI/CD with GitHub Actions, cutting deployment cycles by 50% and ensuring consistent delivery of analytics applications.</li>
+                        <li>Partnered with cross-functional teams to standardize data models, Power Automate flows, and SQL templates, improving reporting accuracy to 99% and reducing repetitive manual processes by 35%.</li>
+                    </ul>
+                </div>
+
+                <div class="resume-item">
+                    <div class="resume-item-header">
+                        <div>
+                            <div class="resume-item-title">Data Engineer</div>
+                            <div class="resume-item-company">BNY Mellon</div>
+                        </div>
+                        <div class="resume-item-date">Jul 2023 - Mar 2024</div>
+                    </div>
+                    <ul>
+                        <li>Engineered and automated data integration pipelines across Snowflake, MySQL, and SAP, increasing financial reporting efficiency by 30% and streamlining compliance workflows.</li>
+                        <li>Delivered Tableau and Power BI dashboards leveraging Databricks real-time data streams, cutting latency of market risk insights by 35% and enabling faster executive response.</li>
+                        <li>Implemented data governance and lineage tracking with AWS IAM, audit logs, and Power Automate notifications, ensuring secure, traceable, and compliant data flows.</li>
+                    </ul>
+                </div>
+
+                <div class="resume-item">
+                    <div class="resume-item-header">
+                        <div>
+                            <div class="resume-item-title">Data Analyst</div>
+                            <div class="resume-item-company">Awaywegoo</div>
+                        </div>
+                        <div class="resume-item-date">Jul 2019 - Jul 2021</div>
+                    </div>
+                    <ul>
+                        <li>Developed a PostgreSQL analytics platform supporting 10K+ monthly queries, accelerating GTM and supply chain decision-making processes.</li>
+                        <li>Built modular ETL pipelines using Alteryx and MySQL, reducing batch processing latency by 40% and increasing data reliability for executive reporting.</li>
+                        <li>Created reusable dashboard templates for investment teams, reducing repetitive requests and promoting analytics self-service adoption across teams.</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="resume-section">
+                <h2>Education</h2>
+                <div class="resume-item">
+                    <div class="resume-item-header">
+                        <div>
+                            <div class="resume-item-title">Master of Science in Information Systems</div>
+                            <div class="resume-item-company">Stevens Institute of Technology</div>
+                        </div>
+                        <div class="resume-item-date">Aug 2021 - May 2023</div>
+                    </div>
+                    <p style="color: var(--accent-cyan); font-weight: 600; margin-top: 0.5rem;">GPA: 3.819 / 4.0</p>
+                </div>
+            </div>
+
+            <div class="resume-section">
+                <h2>Technical Skills</h2>
+                <div class="resume-skills">
+                    <span class="resume-skill">Python</span>
+                    <span class="resume-skill">SQL</span>
+                    <span class="resume-skill">AWS</span>
+                    <span class="resume-skill">Snowflake</span>
+                    <span class="resume-skill">Databricks</span>
+                    <span class="resume-skill">Airflow</span>
+                    <span class="resume-skill">PySpark</span>
+                    <span class="resume-skill">Pandas</span>
+                    <span class="resume-skill">MySQL</span>
+                    <span class="resume-skill">PostgreSQL</span>
+                    <span class="resume-skill">MongoDB</span>
+                    <span class="resume-skill">NoSQL</span>
+                    <span class="resume-skill">Oracle</span>
+                    <span class="resume-skill">Tableau</span>
+                    <span class="resume-skill">Power BI</span>
+                    <span class="resume-skill">Machine Learning</span>
+                    <span class="resume-skill">Git</span>
+                    <span class="resume-skill">Docker</span>
+                    <span class="resume-skill">FastAPI</span>
+                    <span class="resume-skill">SAP</span>
+                    <span class="resume-skill">GraphQL</span>
+                    <span class="resume-skill">Alteryx</span>
+                    <span class="resume-skill">R</span>
+                    <span class="resume-skill">Google Analytics</span>
+                    <span class="resume-skill">Agile/SCRUM</span>
+                    <span class="resume-skill">Linux/Unix</span>
+                    <span class="resume-skill">Data Governance</span>
+                    <span class="resume-skill">Business Analytics</span>
+                    <span class="resume-skill">Operations Research</span>
+                    <span class="resume-skill">Financial Analysis</span>
+                </div>
+            </div>
+
+            <div class="resume-download">
+                <a href="mailto:songarwala@gmail.com?subject=Resume Request" class="btn btn-primary">Request Full Resume PDF</a>
+            </div>
+        </div>
+    </div>
 
     <footer>
         <p>&copy; 2026 Kaushik Songarwala. Built with passion for data engineering.</p>
     </footer>
 
-    <script>
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
         // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -800,6 +1466,43 @@
                     link.classList.add('active');
                 }
             });
+        });
+
+        // Resume Modal
+        const resumeModal = document.getElementById('resumeModal');
+        const resumeBtn = document.getElementById('resumeBtn');
+        const resumeBtnHero = document.getElementById('resumeBtnHero');
+        const closeResume = document.getElementById('closeResume');
+
+        // Open resume modal
+        function openResume(e) {
+            e.preventDefault();
+            resumeModal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        // Close resume modal
+        function closeResumeModal() {
+            resumeModal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        resumeBtn.addEventListener('click', openResume);
+        resumeBtnHero.addEventListener('click', openResume);
+        closeResume.addEventListener('click', closeResumeModal);
+
+        // Close modal when clicking outside
+        resumeModal.addEventListener('click', (e) => {
+            if (e.target === resumeModal) {
+                closeResumeModal();
+            }
+        });
+
+        // Close modal with Escape key
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && resumeModal.classList.contains('active')) {
+                closeResumeModal();
+            }
         });
     </script>
 </body>
